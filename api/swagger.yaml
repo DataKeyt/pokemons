@@ -44,9 +44,6 @@
               }
             }
           },
-          "400": {
-            "description":"Invalid value"
-          }
         }
       }
     },
@@ -66,9 +63,6 @@
             "responses": {
               "200": {
                 "description": "Returns the pokemon with requested id"
-              },
-              "400": {
-                "description": "Invalid id value"
               }
             }
           }
@@ -98,9 +92,6 @@
                   "responses": {
                     "200": {
                       "description": "Pokemon added successfully!"
-                    },
-                    "405": {
-                      "description": "Invalid input"
                     }
                   },
                 }
@@ -135,9 +126,7 @@
                "200": {
                  "description": "Pokemon updated successfully"
                },
-               "404": {
-                 "description": "Pokemon not found!"
-               }
+
              }
            }
      },
@@ -155,9 +144,6 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Invalid id value"
-          },
           "200":{
             "description":"Pokemon deleted successfully"
           }
