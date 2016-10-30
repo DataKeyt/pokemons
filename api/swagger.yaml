@@ -1,0 +1,184 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Pokemons",
+    "description": "**This API lets you read, update, add and delete 1st generation Pokemons and their stories.**\n\nhost: localhost\n"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/xml"
+  ],
+  "produces": [
+    "application/json",
+    "text/html"
+  ],
+  "paths": {
+    "/pokemons/": {
+      "get": {
+        "summary": "Returns all pokemons",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of pokemons to return",
+            "type": "integer",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 151
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all pokemons",
+            "schema": {
+              "title": "Pokemons",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pokemon"
+              }
+            }
+          },
+          "400": {
+            "description":"Invalid value"
+          }
+        }
+      }
+    },
+        "/pokemons/poke_id/": {
+          "get": {
+            "summary": "Returns a single pokemon",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "query",
+                "type": "integer",
+                "format": "int64",
+                "description": "Lets you see the requested pokemon and its story",
+                "required": true
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Returns the pokemon with requested id"
+              },
+              "400": {
+                "description": "Invalid id value"
+              }
+            }
+          }
+          },
+          "/pokemons/add/add.php": {
+             "post": {
+                  "summary": "Adds a new pokemon",
+                   "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                  "parameters": [
+                    {
+                      "name": "name",
+                      "in": "query",
+                      "type": "string",
+                      "description": "The Pokemon name you want to post",
+                      "required": true
+                    },
+                      {
+                      "name": "story",
+                      "in": "query",
+                      "type": "string",
+                      "description": "The Pokemon story you want to post",
+                      "required": true
+                    },
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "Pokemon added successfully!"
+                    },
+                    "405": {
+                      "description": "Invalid input"
+                    }
+                  },
+                }
+          },
+     "/pokemons/edit/": {
+     "put": {
+             "summary": "Updates an existing pokemon by its ID",
+             "parameters": [
+               {
+                 "name": "id",
+                 "in": "query",
+                 "type": "integer",
+                 "description": "The pokemon ID you want to update",
+                 "required": true
+               },
+                {
+                 "name": "name",
+                 "in": "query",
+                 "type": "string",
+                 "description": "Pokemon name",
+                 "required": true
+               },
+                {
+                 "name": "story",
+                 "in": "query",
+                 "type": "string",
+                 "description": "New story",
+                 "required": true
+               }
+             ],
+             "responses": {
+               "200": {
+                 "description": "Pokemon updated successfully"
+               },
+               "404": {
+                 "description": "Pokemon not found!"
+               }
+             }
+           }
+     },
+     "/pokemons/delete/":{
+      "delete": {
+        "summary": "Deletes a pokemon by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "integer",
+            "format": "int64",
+            "description": "Deletes the pokemon with requested id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id value"
+          },
+          "200":{
+            "description":"Pokemon deleted successfully"
+          }
+        },
+      }
+    }
+  },
+  "definitions": {
+    "Pokemon": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"},
+        "name": {
+          "type": "string"
+        },
+        "story": {
+          "type": "string",
+          "format": "varchar"
+        }
+      }
+    }
+  }
+}
